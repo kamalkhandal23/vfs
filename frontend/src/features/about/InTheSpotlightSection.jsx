@@ -87,10 +87,10 @@ export default function ImportantUpdatesSection() {
   const displayItems = useMemo(() => UPDATES, []);
 
   return (
-    <section className="relative overflow-hidden py-16 bg-[#0A2342]">
+    <section className="relative overflow-hidden py-16 ">
 
       {/* HEADING */}
-      <h2 className="text-center text-[26px] md:text-[34px] font-semibold text-white">
+      <h2 className="text-center text-[26px] md:text-[34px] font-semibold text-[#0A2342]">
         Important Updates & Announcements
       </h2>
 

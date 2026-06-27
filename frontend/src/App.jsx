@@ -73,7 +73,7 @@ function AppContent() {
 function App() {
   return (
     <BrowserRouter
-      basename="/m2m-website"
+      basename="/vrinda-foundation/"
       future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
     >
       <AppContent />

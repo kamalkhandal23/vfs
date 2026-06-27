@@ -1,77 +1,100 @@
 import fleetBg from "../../assets/images/vfs-hero-section/vfs3.jpg";
 import { useNavigate } from "react-router-dom";
+import {
+  ArrowRight,
+  Award,
+  BookOpen,
+  School,
+  Sparkles,
+  Users,
+} from "lucide-react";
+
+const HIGHLIGHTS = [
+  { label: "Since 2009", icon: Award },
+  { label: "English Medium School", icon: BookOpen },
+  { label: "Play Nursery to Class 12", icon: School },
+];
+
+const QUICK_STATS = [
+  { value: "1200+", label: "Students Guided", icon: Users },
+  { value: "15+", label: "Years of Excellence", icon: Award },
+  { value: "100%", label: "Focus on Growth", icon: Sparkles },
+];
 
 export default function AboutHeroSection() {
   const navigate = useNavigate();
 
   return (
-    <section className="relative w-full h-[520px] md:h-[560px] overflow-hidden">
+    <section className="relative overflow-hidden bg-[#0A2342]">
 
       {/* BACKGROUND IMAGE */}
       <img
         src={fleetBg}
         alt="Vrinda Foundation School"
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 h-full w-full object-cover"
       />
 
-      {/* DARK OVERLAY */}
-      <div className="absolute inset-0 bg-black/50" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#081A33]/92 via-[#081A33]/78 to-[#0F4C81]/55" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(0,207,200,0.18),_transparent_28%),radial-gradient(circle_at_bottom_right,_rgba(255,255,255,0.12),_transparent_30%)]" />
 
       {/* CONTENT */}
-      <div className="relative z-10 h-full flex items-center justify-center md:justify-start px-5 md:px-6 md:pl-[10%]">
+      <div className="relative z-10 mx-auto flex min-h-[640px] max-w-[1280px] items-center px-5 py-20 md:px-6 md:py-24">
+        <div className="grid w-full gap-10 lg:grid-cols-[1.25fr_0.85fr] lg:items-center">
+          <div className="max-w-[720px] text-center lg:text-left">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-1.5 text-[12px] font-semibold tracking-[0.18em] text-white uppercase backdrop-blur-sm">
+              <Sparkles size={14} />
+              About Us
+            </div>
 
-        <div className="max-w-[700px] text-center md:text-left">
+            <h1 className="mt-5 text-[34px] font-semibold leading-[1.08] text-white md:text-[58px]">
+              About Vrinda Foundation School
+            </h1>
 
-          {/* HEADING */}
-          <h1 className="text-[28px] md:text-[40px] font-semibold text-white leading-[1.2]">
-            About Vrinda Foundation School
-          </h1>
+            <p className="mt-5 max-w-[650px] text-[15px] leading-[1.8] text-white/88 md:text-[17px]">
+              Rooted in Indian values and focused on holistic development, Vrinda
+              Foundation School provides a nurturing environment where every child
+              grows with confidence, discipline, and a strong academic foundation.
+            </p>
 
-          {/* SUBTEXT */}
-          <p className="mt-4 text-[14px] md:text-[16px] text-white/90 leading-[1.6]">
-            Rooted in Indian values and focused on holistic development, Vrinda Foundation School provides a nurturing environment where every child grows with confidence, discipline, and strong academic foundation.
-          </p>
+            <p className="mt-4 max-w-[640px] text-[14px] leading-[1.8] text-white/74 md:text-[15px]">
+              From Play Nursery to Class 12, we emphasize English communication,
+              modern teaching methods, and concept-based learning supported by
+              experienced faculty and audio-visual classrooms.
+            </p>
 
-          {/* DESCRIPTION */}
-          <p className="mt-3 text-[13px] md:text-[14px] text-white/80 leading-[1.6]">
-            From Play Nursery to Class 12, we emphasize English communication, modern teaching methods, and concept-based learning supported by experienced faculty and audio-visual classrooms.
-          </p>
+            <div className="mt-6 flex flex-wrap justify-center gap-3 lg:justify-start">
+              {HIGHLIGHTS.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <span
+                    key={item.label}
+                    className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/10 px-4 py-2 text-[12px] font-medium text-white/92 backdrop-blur-sm"
+                  >
+                    <Icon size={14} />
+                    {item.label}
+                  </span>
+                );
+              })}
+            </div>
 
-          {/* HIGHLIGHTS */}
-          <div className="mt-5 flex flex-wrap gap-3 text-[12px] md:text-[13px] text-white/90">
+            <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start">
+              <button
+                onClick={() => navigate("/admissions")}
+                className="inline-flex items-center gap-2 rounded-full bg-[#00CFC8] px-7 py-3.5 text-[15px] font-semibold text-[#0A2342] shadow-[0_12px_28px_rgba(0,207,200,0.28)] transition hover:scale-[1.03]"
+              >
+                Apply Now
+                <ArrowRight size={16} />
+              </button>
 
-            <span className="bg-white/10 px-3 py-1 rounded-full">
-              Since 2009
-            </span>
-
-            <span className="bg-white/10 px-3 py-1 rounded-full">
-              English Medium School
-            </span>
-
-            <span className="bg-white/10 px-3 py-1 rounded-full">
-              Play Nursery to Class 12
-            </span>
-
+              <button
+                onClick={() => navigate("/about")}
+                className="rounded-full border border-white/55 px-7 py-3.5 text-[15px] font-semibold text-white transition hover:bg-white hover:text-[#0A2342]"
+              >
+                Learn More
+              </button>
+            </div>
           </div>
 
-          {/* CTA */}
-          <div className="mt-6 flex flex-col md:flex-row gap-3 justify-center md:justify-start">
-
-            <button
-              onClick={() => navigate("/admissions")}
-              className="bg-[#00CFC8] text-[#0A2342] px-6 py-3 rounded-full font-semibold hover:scale-105 transition"
-            >
-              Apply Now
-            </button>
-
-            <button
-              onClick={() => navigate("/about")}
-              className="border border-white px-6 py-3 rounded-full text-white font-medium hover:bg-white hover:text-[#0A2342] transition"
-            >
-              Learn More
-            </button>
-
-          </div>
 
         </div>
       </div>

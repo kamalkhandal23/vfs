@@ -2,7 +2,7 @@ import { Phone } from "lucide-react";
 
 export default function ContactCTASection() {
   return (
-    <section className="bg-[#0A2342] px-4 py-12 md:px-6 md:py-16">
+    <section className="px-4 py-12 md:px-6 md:py-16">
       <div className="mx-auto max-w-[1100px]">
 
         {/* CONTAINER */}
