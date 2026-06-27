@@ -10,7 +10,7 @@ import {
   Trophy,
 } from "lucide-react";
 import coachImg from "../assets/images/vfs-hero-section/vfs3.jpg";
-import coachPortrait from "../assets/images/vfs-hero-section/director-sir.jpeg";
+import coachPortrait from "../assets/images/coach.jpeg";
 import student1 from "../assets/images/vfs-hero-section/vfs3.jpg";
 
 const HERO_BADGES = [
