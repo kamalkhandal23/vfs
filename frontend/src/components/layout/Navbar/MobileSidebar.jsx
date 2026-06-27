@@ -1,27 +1,43 @@
-import { X, ChevronRight } from "lucide-react";
+import {
+  ArrowRight,
+  ChevronRight,
+  LogOut,
+  MapPin,
+  Menu,
+  Phone,
+  Sparkles,
+  UserCircle2,
+  X,
+} from "lucide-react";
 import { NavLink } from "react-router-dom";
 
 import topBg from "../../../assets/styles/contact-bg.svg";
 import fallbackAvatar from "../../../assets/icons/user2.png";
 import logo from "../../../assets/logo/vfs-logo.png";
 
-/* ===== MENU CONFIG ===== */
-const MENU = [
+const FALLBACK_MENU = [
   { label: "HOME", path: "/" },
-  { label: "ADMISSION", path: "/admissions" },
+  { label: "ADMISSIONS", path: "/admissions" },
   { label: "ACADEMICS", path: "/fleet" },
   { label: "FAQ", path: "/faq" },
   { label: "CONTACT US", path: "/contact" },
+  { label: "ABOUT US", path: "/about" },
 ];
 
 export default function MobileSidebar({
   isOpen,
   onClose,
+  side = "left",
+  links,
   user,
   onAuthAction,
   onLogout,
 }) {
   const isLoggedIn = !!user;
+  const menuItems = Array.isArray(links) && links.length > 0 ? links : FALLBACK_MENU;
+  const panelSideClass =
+    side === "right" ? "right-0 translate-x-full" : "left-0 -translate-x-full";
+  const openClass = side === "right" ? "translate-x-0" : "translate-x-0";
 
   return (
     <>
@@ -35,86 +51,138 @@ export default function MobileSidebar({
 
       {/* ===== SIDEBAR ===== */}
       <div
-        className={`fixed top-0 left-0 w-[85%] max-w-[360px] h-full bg-[#ffffff] z-50 transform transition duration-300 ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
+        className={`fixed top-0 ${side === "right" ? "right-0" : "left-0"} z-50 h-full w-[88%] max-w-[360px] transform overflow-hidden bg-[#F5F8FC] shadow-[0_28px_70px_rgba(7,28,61,0.3)] transition duration-300 ${
+          isOpen ? openClass : panelSideClass
         }`}
       >
-        {/* ===== TOP HEADER ===== */}
-        <div
-          className="relative h-[130px] px-5 pt-4"
-          style={{
-            backgroundImage: `url(${topBg})`,
-            backgroundSize: "cover",
-            backgroundPosition: "bottom",
-          }}
-        >
-          {/* CLOSE BUTTON */}
-          <button
-            onClick={onClose}
-            className="absolute right-4 top-4 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow"
+        <div className="flex h-full flex-col">
+          {/* ===== TOP HEADER ===== */}
+          <div
+            className="relative px-5 pb-5 pt-5 text-white"
+            style={{
+              backgroundImage: `linear-gradient(180deg, rgba(10,35,66,0.98) 0%, rgba(10,35,66,0.94) 100%), url(${topBg})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center bottom",
+            }}
           >
-            <X size={16} />
-          </button>
+            <div className="absolute inset-x-0 bottom-0 h-4 bg-[radial-gradient(circle_at_10px_-2px,transparent_8px,rgba(245,248,252,1)_9px)] bg-[length:22px_16px] bg-repeat-x opacity-95" />
 
-          {/* USER / LOGO */}
-          {isLoggedIn ? (
-            <div className="flex items-center gap-3 mt-6">
-              <img
-                src={user?.avatar || fallbackAvatar}
-                alt="user"
-                className="w-10 h-10 rounded-full object-cover border-2 border-white"
-              />
-              <div>
-                <p className="text-white font-semibold text-[14px]">
-                  {user?.name || "User"}
-                </p>
-                <p className="text-white text-[11px] opacity-90">
-                  {user?.phone || "+91 XXXXX XXXXX"}
-                </p>
+            <button
+              onClick={onClose}
+              className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-white text-[#0A2342] shadow-[0_10px_24px_rgba(0,0,0,0.18)]"
+              aria-label="Close menu"
+            >
+              <X size={16} />
+            </button>
+
+            <div className="relative pr-10">
+              <div className="flex items-center gap-3">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/12">
+                  <img src={logo} alt="logo" className="h-10 w-auto" />
+                </div>
+                <div>
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.26em] text-white/65">
+                    Vrinda Foundation
+                  </p>
+                  <h2 className="mt-1 text-lg font-semibold leading-tight">
+                    School menu
+                  </h2>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          {/* ===== NAV AREA ===== */}
+          <div className="flex-1 overflow-y-auto px-4 py-5 custom-scroll">
+            <div className="rounded-[24px] border border-[#DCE6F1] bg-white p-3 shadow-[0_14px_32px_rgba(15,45,58,0.06)]">
+              <div className="mb-3 flex items-center gap-2 px-2 text-[11px] font-semibold uppercase tracking-[0.26em] text-[#6B7E95]">
+                <Sparkles size={14} className="text-[#137DC5]" />
+                Explore
+              </div>
+
+              <div className="space-y-1">
+                {menuItems.map((item) => (
+                  <NavLink
+                    key={item.path}
+                    to={item.path}
+                    onClick={onClose}
+                    className={({ isActive }) =>
+                      `flex items-center justify-between rounded-2xl px-3 py-3 transition ${
+                        isActive
+                          ? "bg-[#0A2342] text-white shadow-[0_12px_24px_rgba(10,35,66,0.16)]"
+                          : "text-[#0A2342] hover:bg-[#F4F8FC]"
+                      }`
+                    }
+                  >
+                    <span className="text-sm font-semibold tracking-[0.02em]">
+                      {item.label}
+                    </span>
+                    <ChevronRight size={15} className="opacity-70" />
+                  </NavLink>
+                ))}
               </div>
             </div>
-          ) : (
-            <div className="mt-1 ">
-              <img src={logo} alt="logo" className="h-18" />
-            </div>
-          )}
-        </div>
 
-        {/* ===== MENU ===== */}
-        <div className="px-5 mt-5">
-          <div className="bg-white rounded-[10px] overflow-hidden border-[#E6E6E6]">
-            {MENU.map((item, i) => (
-              <NavLink
-                key={i}
-                to={item.path}
-                onClick={onClose}
-                className={({ isActive }) =>
-                  `flex justify-between items-center px-4 py-3 border-b border-[#E6E6E6] last:border-none transition ${
-                    isActive ? "bg-[#e6f0f8]" : "hover:bg-gray-50"
-                  }`
-                }
+            <div className="mt-4 grid gap-3 rounded-[24px] border border-[#DCE6F1] bg-white p-4 shadow-[0_14px_32px_rgba(15,45,58,0.05)]">
+              <div className="flex items-center gap-3 rounded-2xl bg-[#F6FAFE] p-3">
+                {isLoggedIn ? (
+                  <img
+                    src={user?.avatar || fallbackAvatar}
+                    alt="user"
+                    className="h-11 w-11 rounded-2xl object-cover ring-2 ring-white"
+                  />
+                ) : (
+                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#0A2342] text-white">
+                    <UserCircle2 size={18} />
+                  </div>
+                )}
+                <div className="min-w-0">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#6B7E95]">
+                    {isLoggedIn ? "Signed in" : "Get started"}
+                  </p>
+                  <p className="truncate text-sm font-semibold text-[#0A2342]">
+                    {isLoggedIn ? user?.name || "User" : "Open signup or login"}
+                  </p>
+                </div>
+              </div>
+
+              <button
+                onClick={isLoggedIn ? onLogout : onAuthAction}
+                className="flex items-center justify-center gap-2 rounded-full bg-[#0A2342] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#12355D]"
               >
-                <span className="text-[13px] font-semibold text-[#0A2342]">
-                  {item.label}
-                </span>
-                <ChevronRight size={16} />
-              </NavLink>
-            ))}
+                {isLoggedIn ? <LogOut size={16} /> : <ArrowRight size={16} />}
+                {isLoggedIn ? "Sign out" : "Sign up"}
+              </button>
+
+              <div className="grid grid-cols-2 gap-3 text-[#0A2342]">
+                <div className="rounded-2xl bg-[#F6FAFE] p-3">
+                  <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#6B7E95]">
+                    <Phone size={13} />
+                    Call
+                  </div>
+                  <p className="mt-2 text-sm font-semibold">+91 9001700414</p>
+                </div>
+                <div className="rounded-2xl bg-[#F6FAFE] p-3">
+                  <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#6B7E95]">
+                    <MapPin size={13} />
+                    Visit
+                  </div>
+                  <p className="mt-2 text-sm font-semibold">Jaswantgarh</p>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
 
-        {/* ===== BOTTOM BUTTON ===== */}
-        <div className="absolute bottom-10 left-0 w-full px-5">
-          <button
-            onClick={isLoggedIn ? onLogout : onAuthAction}
-            className="w-full bg-[#0A2342] text-white py-3 rounded-[10px] text-[14px] font-semibold transition hover:scale-[1.02] active:scale-[0.95]"
-          >
-            {isLoggedIn ? "SIGN OUT" : "SIGN UP"}
-          </button>
-
-          <p className="text-center text-[10px] text-gray-400 mt-3">
-            App Version <br /> 1.0.0
-          </p>
+          {/* ===== BOTTOM FOOTER ===== */}
+          <div className="border-t border-[#E1EAF3] bg-[#F5F8FC] px-5 py-4">
+            <div className="flex items-center justify-between text-[11px] text-[#6B7E95]">
+              <span className="font-semibold uppercase tracking-[0.22em]">
+                App Version
+              </span>
+              <span className="font-medium text-[#0A2342]">1.0.0</span>
+            </div>
+          </div>
         </div>
       </div>
     </>

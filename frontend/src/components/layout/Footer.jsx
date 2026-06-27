@@ -8,14 +8,16 @@ import {
   Facebook,
   Instagram,
   Linkedin,
+  Youtube,
 } from "lucide-react";
 
 export default function Footer() {
   const [openForm, setOpenForm] = useState(false);
   const socialLinks = [
-    { icon: Facebook, url: "#" },
-    { icon: Instagram, url: "#" },
-    { icon: Linkedin, url: "#" },
+    { label: "Facebook", icon: Facebook, url: "#" },
+    { label: "Instagram", icon: Instagram, url: "#" },
+    { label: "LinkedIn", icon: Linkedin, url: "#" },
+    { label: "YouTube", icon: Youtube, url: "#" },
   ];
 
   return (
@@ -32,14 +34,6 @@ export default function Footer() {
               Vrinda Foundation School is committed to providing quality education,
               discipline, and holistic development to shape future leaders.
             </p>
-
-            <div className="flex gap-3 mt-4">
-              {socialLinks.map(({ icon: Icon, url }, i) => (
-                <a key={i} href={url} className="p-2 bg-white/10 rounded hover:bg-white/20">
-                  <Icon size={16} />
-                </a>
-              ))}
-            </div>
           </div>
 
           {/* QUICK LINKS */}
@@ -140,6 +134,10 @@ export default function Footer() {
             <Link to="/" className="block">Home</Link>
             <Link to="/about" className="block">About</Link>
             <Link to="/admissions" className="block">Admissions</Link>
+            <Link to="/neev" className="block">NEEV</Link>
+            <Link to="/gallery" className="block">Gallery</Link>
+            <Link to="/results" className="block">Results</Link>
+            <Link to="/karate" className="block">Karate Classes</Link>
           </div>
 
           <div>
@@ -148,6 +146,21 @@ export default function Footer() {
             <a href="mailto:info@vrindafoundation.com" className="block">
               info@vrindafoundation.com
             </a>
+            <div className="mt-4">
+              <h4 className="mb-2 font-semibold">Follow Us</h4>
+              <div className="flex gap-2">
+                {socialLinks.map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.url}
+                    aria-label={social.label}
+                    className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition"
+                  >
+                    <social.icon size={14} />
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
 
         </div>
